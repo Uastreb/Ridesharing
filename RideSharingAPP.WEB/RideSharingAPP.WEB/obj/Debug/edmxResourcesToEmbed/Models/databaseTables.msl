@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище RideSharingAppDBModelContainer" CdmEntityContainer="DefaultConnection">
+    <EntitySetMapping Name="AccountsInformation">
+      <EntityTypeMapping TypeName="RideSharingAppDBModel.AccountsInformation">
+        <MappingFragment StoreEntitySet="AccountsInformation">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="DynamicSalt" ColumnName="DynamicSalt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cars">
+      <EntityTypeMapping TypeName="RideSharingAppDBModel.Cars">
+        <MappingFragment StoreEntitySet="Cars">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Mark" ColumnName="Mark" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="YearOfIssue" ColumnName="YearOfIssue" />
+          <ScalarProperty Name="RegistrationNumber" ColumnName="RegistrationNumber" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+          <ScalarProperty Name="DriverID" ColumnName="DriverID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Clients">
+      <EntityTypeMapping TypeName="RideSharingAppDBModel.Clients">
+        <MappingFragment StoreEntitySet="Clients">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="DateOfRegistration" ColumnName="DateOfRegistration" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+          <ScalarProperty Name="ReasonForBlocking" ColumnName="ReasonForBlocking" />
+          <ScalarProperty Name="AccountInformationID" ColumnName="AccountInformationID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Companions">
+      <EntityTypeMapping TypeName="RideSharingAppDBModel.Companions">
+        <MappingFragment StoreEntitySet="Companions">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+          <ScalarProperty Name="PassingPointID" ColumnName="PassingPointID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Drivers">
+      <EntityTypeMapping TypeName="RideSharingAppDBModel.Drivers">
+        <MappingFragment StoreEntitySet="Drivers">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="DateOfRegistration" ColumnName="DateOfRegistration" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+          <ScalarProperty Name="ReasonForBlocking" ColumnName="ReasonForBlocking" />
+          <ScalarProperty Name="AccountInformationID" ColumnName="AccountInformationID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DriversLicenses">
+      <EntityTypeMapping TypeName="RideSharingAppDBModel.DriversLicenses">
+        <MappingFragment StoreEntitySet="DriversLicenses">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="DateOfReceiving" ColumnName="DateOfReceiving" />
+          <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+          <ScalarProperty Name="DriverLicensesNumber" ColumnName="DriverLicensesNumber" />
+          <ScalarProperty Name="IssuingAuthority" ColumnName="IssuingAuthority" />
+          <ScalarProperty Name="Categories" ColumnName="Categories" />
+          <ScalarProperty Name="DriverID" ColumnName="DriverID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PassingPoints">
+      <EntityTypeMapping TypeName="RideSharingAppDBModel.PassingPoints">
+        <MappingFragment StoreEntitySet="PassingPoints">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="OriginCoordinates" ColumnName="OriginCoordinates" />
+          <ScalarProperty Name="EndCoordinates" ColumnName="EndCoordinates" />
+          <ScalarProperty Name="DateAndTimeOfDepartue" ColumnName="DateAndTimeOfDepartue" />
+          <ScalarProperty Name="DateAndTimeOfArrival" ColumnName="DateAndTimeOfArrival" />
+          <ScalarProperty Name="Cost" ColumnName="Cost" />
+          <ScalarProperty Name="PointNumberOfThisTrip" ColumnName="PointNumberOfThisTrip" />
+          <ScalarProperty Name="Periodic" ColumnName="Periodic" />
+          <ScalarProperty Name="TripID" ColumnName="TripID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Trips">
+      <EntityTypeMapping TypeName="RideSharingAppDBModel.Trips">
+        <MappingFragment StoreEntitySet="Trips">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="NumberOfSeats" ColumnName="NumberOfSeats" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="RegistrationEndDate" ColumnName="RegistrationEndDate" />
+          <ScalarProperty Name="Periodic" ColumnName="Periodic" />
+          <ScalarProperty Name="CarID" ColumnName="CarID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,152 @@
+﻿@model IEnumerable<RideSharingAPP.WEB.Models.Companion.CompanionViewModel>
+
+@{
+    Layout = "~/Views/Shared/_LayoutClient.cshtml";
+    ViewBag.Title = "RegistrationRoutesList";
+}
+<head>
+    <meta charset='utf-8' />
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.3.2/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.3.2/mapbox-gl.css' rel='stylesheet' />
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+    <link href="~/Content/Client/CustomStylesRouteList.css" rel="stylesheet" />
+</head>
+<body>
+    @{
+        IEnumerable<ModelError> allErrors = ViewData.ModelState.Values.SelectMany(v => v.Errors);
+    }
+
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @{ if (Model != null)
+        {
+            <table class="table">
+                @foreach (var item in Model)
+                {
+                    using (Html.BeginForm("RegisterForRoute", "Client", FormMethod.Post))
+                    {
+                        @Html.Hidden("id", item.id)
+                <tr>
+                    <th style="text-align:center">
+                        @Html.Label("Отправление")
+                    </th>
+                    <th style="text-align:center">
+                        @Html.Label("Прибытие")
+                    </th>
+                    <th style="text-align:center">
+                        @Html.Label("Отправление")
+                    </th>
+                    <th style="text-align:center">
+                        @Html.Label("Прибытие")
+                    </th>
+                    <th style="text-align:center">
+                        @Html.Label("Стоимость")
+                    </th>
+                    <th style="text-align:center">
+                        @Html.Label("Телефон водителя")
+                    </th>
+                </tr>
+                        <tr></tr>
+                        <tr>
+                            @Html.Hidden("OriginCoordinates", item.OriginCoordinates)
+                            <td class="points" style="text-align:center">
+                                @Html.DisplayFor(modelItem => item.OriginCoordinates)
+                            </td>
+                            @Html.Hidden("EndCoordinates", item.EndCoordinates)
+                            <td class="points" style="text-align:center">
+                                @Html.DisplayFor(modelItem => item.EndCoordinates)
+
+                            </td>
+                            <td style="text-align:center">
+                                @Html.DisplayFor(modelItem => item.DateAndTimeOfDepartue)
+                                @Html.Hidden("DateAndTimeOfDepartue", item.DateAndTimeOfDepartue)
+                            </td>
+                            <td style="text-align:center">
+                                @Html.DisplayFor(modelItem => item.DateAndTimeOfArrival)
+                                @Html.Hidden("DateAndTimeOfArrival", item.DateAndTimeOfArrival)
+                            </td>
+                            <td style="text-align:center">
+                                @Html.DisplayFor(modelItem => item.TotalCost)
+                                @Html.Hidden("TotalCost", item.TotalCost)
+                            </td>
+                            <td style="text-align:center">
+                                @Html.DisplayFor(modelItem => item.Telephone)
+                                @Html.Hidden("Telephone", item.Telephone)
+                            </td>
+                        </tr>
+                        <tr name="@item.id" style="display:none; background-color:#FAFAD2;">
+                            <th></th>
+                            <th colspan="2" style="text-align:center;">
+                                @Html.Label("Подробный маршрут")
+                            </th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.ActionLink("Найти маршрут", "SearchRoute", null, new { @class = "btn btn-default", style = "margin-bottom:25px;" })
+                            </td>
+                            <td>
+                                @Html.ActionLink("Отменить регистрацию", "Unregister", new { companionId = item.id }, new { @class = "btn btn-default", style = "margin-bottom:25px;" })
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                            }
+                        }
+</table>
+
+        }
+        else
+        {
+            <h2> Не надено ни одного маршрута </h2>
+            @Html.ActionLink("Задать другие координаты", "SearchRoute", null, new { @class = "btn btn-default", style = "margin-top:25px;" })
+        }
+    }
+
+
+    <script type="text/javascript">
+        function showElements(itemId) {
+            var arr = document.getElementsByName(itemId);
+            console.log(arr);
+            arr.forEach(function (element) {
+                if (element.style.display == "none" || element.style.display == "") {
+                    element.style.display = "table-row";
+                }
+                else {
+                    element.style.display = "none";
+                }
+            });
+        }
+
+
+        $('.points').each(function () {
+            SearchPlace(this);
+        });
+
+
+        function SearchPlace(label) {
+            var coordinates = label.innerText.split(',');
+            latitude = coordinates[1];
+            longitude = coordinates[0];
+
+            var request = new XMLHttpRequest();
+            var url = "https://places-dsn.algolia.net/1/places/reverse?aroundLatLng=" + latitude + "," + longitude + "&hitsPerPage=5&language=ru";
+            request.abort();
+            request.open('GET', url, true);
+            request.send();
+
+            request.onload = function () {
+                if (request.status >= 200 && request.status < 400) {
+                    var data = JSON.parse(request.responseText);
+                    label.innerHTML = data.hits[0].country + ", " + data.hits[0].locale_names[0];
+                }
+            };
+        };
+    </script>
+</body>

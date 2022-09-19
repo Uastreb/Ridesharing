@@ -1,0 +1,142 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Main Styles -->
+    <link rel="stylesheet" href="~/Content/Home/Css/style.min.css">
+
+    <!-- Material Design Icon -->
+    <link rel="stylesheet" href="~/Content/Home/Fonts/materialdesignicons.css">
+
+    <!-- mCustomScrollbar -->
+    <link rel="stylesheet" href="~/Content/Home/Css/jquery.mCustomScrollbar.min.css">
+
+    <!-- Waves Effect -->
+    <link rel="stylesheet" href="~/Content/Home/Css/waves.min.css">
+
+    <!-- Sweet Alert -->
+    <link rel="stylesheet" href="~/Content/Home/Css/sweetalert.css">
+
+    <!-- Dark Themes -->
+    <link rel="stylesheet" href="~/Content/Home/Css/style-dark.min.css">
+</head>
+
+<body>
+    <div class="main-menu">
+        <header class="header">
+            <a href="" class="logo">RideSharing</a>
+            <button type="button" class="button-close fa fa-times js__menu_close"></button>
+        </header>
+        <!-- /.header -->
+        <div class="content">
+
+            <div class="navigation">
+                <ul class="menu js__accordion">
+                    <li>
+                        <a class="waves-effect parent-item js__control" href="#"><span>Маршруты</span><span class="menu-arrow fa fa-angle-down"></span></a>
+                        <ul class="sub-menu js__content">
+                            <li>@Html.ActionLink("Активные", "RegistrationRoutesList", "Client", null, "")</li>
+                            <li>@Html.ActionLink("Найти", "SearchRoute", "Client", null, "")</li>
+                        </ul>
+                        <!-- /.sub-menu js__content -->
+                    </li>
+                </ul>
+                <!-- /.menu js__accordion -->
+            </div>
+            <!-- /.navigation -->
+        </div>
+        <!-- /.content -->
+    </div>
+    <!-- /.main-menu -->
+
+    <div id="mynavbar" class="fixed-navbar">
+        <div class="pull-left">
+            <button id="mobbutton" type="button" class="menu-mobile-button glyphicon glyphicon-menu-hamburger js__menu_mobile"></button>
+            <h1 class="page-title">@ViewBag.PageTitle</h1>
+            <!-- /.page-title -->
+        </div>
+        <!-- /.pull-left -->
+        <div class="pull-right">
+            <div class="ico-item">
+                <a href="#" class="ico-item fa fa-search js__toggle_open" data-target="#searchform-header"></a>
+                <form action="#" id="searchform-header" class="searchform js__toggle"><input type="search" placeholder="Search..." class="input-search"><button class="fa fa-search button-search" type="submit"></button></form>
+                <!-- /.searchform -->
+            </div>
+            <!-- /.ico-item -->
+            <div class="ico-item fa fa-arrows-alt js__full_screen"></div>
+            <!-- /.ico-item -->
+            <div class="ico-item">
+                <img src="http://placehold.it/80x80" alt="" class="ico-img">
+                <ul class="sub-ico-item">
+                    <li>
+                        @Html.ActionLink("Личный кабинет", "Index", "Client")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Выход", "LogOut", "Authorization")
+                    </li>
+                </ul>
+                <!-- /.sub-ico-item -->
+            </div>
+            <!-- /.ico-item -->
+        </div>
+        <!-- /.pull-right -->
+    </div>
+    <!-- /.fixed-navbar -->
+
+    <div id="wrapper">
+        <div class="main-content">
+            <div id="rendercontent" class="container body-content paddingform" style="margin: 0px 0px 0px 0px;">
+                @RenderBody()
+            </div>
+
+
+            @Scripts.Render("~/bundles/jquery")
+            @Scripts.Render("~/bundles/bootstrap")
+            @RenderSection("scripts", required: false)
+        </div>
+        <!-- /.main-content -->
+    </div><!--/#wrapper -->
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="assets/script/html5shiv.min.js"></script>
+        <script src="assets/script/respond.min.js"></script>
+    <![endif]-->
+    <!--
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="~/Content/Home/Js/jquery.min.js"></script>
+    <script src="~/Content/Home/Js/modernizr.min.js"></script>
+    <script src="~/Content/Home/Js/bootstrap.min.js"></script>
+    <script src="~/Content/Home/Js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="~/Content/Home/Js/nprogress.js"></script>
+    <script src="~/Content/Home/Js/sweetalert.min.js"></script>
+    <script src="~/Content/Home/Js/waves.min.js"></script>
+    <script src="~/Content/Home/Js/jquery.fullscreen-min.js"></script>
+    <script src="~/Content/Home/Js/main.min.js"></script>
+
+    <script type="text/javascript">
+        if (!~navigator.userAgent.search('Windows')) {
+            document.getElementById("mobbutton").disabled = false;
+            document.getElementById("mobbutton").style.display = "block";
+            document.getElementById("mynavbar").style.padding = "0px 20px 0px 70px";
+        } else {
+            document.getElementById("mynavbar").style.padding = "0px 20px 0px 20px";
+            document.getElementById("mobbutton").disabled = true;
+            document.getElementById("mobbutton").style.display = "none";
+        }
+    </script>
+</body>
+</html>

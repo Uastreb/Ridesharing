@@ -1,0 +1,231 @@
+﻿@model IEnumerable<RideSharingAPP.WEB.Models.Route.TripsListViewModel>
+@{
+    Layout = "~/Views/Shared/_LayoutDriver.cshtml";
+    ViewBag.Title = "RouteList";
+}
+<head>
+    <link href='~/Content/Driver(RouteList)/CustomStylesRouteList.css' rel='stylesheet' />
+</head>
+@Html.AntiForgeryToken()
+@{ if (Model != null)
+    {
+        <table class="table">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th>
+                        @Html.Label("Окончание регистрации")
+                    </th>
+                    <th>
+                        @Html.Label("Отправление из")
+                    </th>
+                    <th>
+                        @Html.Label("Прибытие в")
+                    </th>
+                    <th>
+                        @Html.Label("Отправление")
+                    </th>
+                    <th>
+                        @Html.Label("Прибытие")
+                    </th>
+                    <th>
+                        @Html.Label("Места")
+                    </th>
+                    <th>
+                        @Html.Label("Марка автомобиля")
+                    </th>
+                    <th>
+                        @Html.Label("Модель автомобиля")
+                    </th>
+                    <th>
+                        @Html.Label("Регистрационный номер")
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RegistrationEndDate)
+                    </td>
+                    <td class="points">
+                        @Html.DisplayFor(modelItem => item.Points.First().OriginCoordinates)
+                    </td>
+                    <td class="points">
+                        @Html.DisplayFor(modelItem => item.Points.Last().EndCoordinates)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Points.First().DateAndTimeOfDepartue)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Points.Last().DateAndTimeOfArrival)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NumberOfSeats)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Car.Mark)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Car.Model)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Car.RegistrationNumber)
+                    </td>
+                </tr>
+                <tr name="@item.id" class="hiddenElements">
+                    <th></th>
+                    <th>
+                        @Html.Label("Отправление из")
+                    </th>
+                    <th>
+                        @Html.Label("Прибытие в")
+                    </th>
+                    <th>
+                        @Html.Label("Отправление")
+                    </th>
+                    <th>
+                        @Html.Label("Прибытие")
+                    </th>
+                    <th>
+                        @Html.Label("Стоимость")
+                    </th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                foreach (var itemPoint in item.Points)
+                {
+                    <tr name="@item.id" class="hiddenElements">
+                        <td></td>
+                        <td class="points">
+                            @Html.DisplayFor(modelItem => itemPoint.OriginCoordinates)
+                        </td>
+                        <td class="points">
+                            @Html.DisplayFor(modelItem => itemPoint.EndCoordinates)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => itemPoint.DateAndTimeOfDepartue)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => itemPoint.DateAndTimeOfArrival)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => itemPoint.Cost)
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                }
+                foreach (var client in item.Clients)
+                {
+                    <tr name="@item.CarId" class="hiddenElements" style="background-color:#FFFAFA;">
+                        <th colspan="2" style="text-align:center">
+                            @Html.Label("ФИО")
+                        </th>
+                        <th>
+                            @Html.Label("Год рождения")
+                        </th>
+                        <th colspan="2" style="text-align:center">
+                            @Html.Label("Номер телефона")
+                        </th>
+                        <th style="text-align:center">
+                            @Html.Label("До точки")
+                        </th>
+                        <th style="text-align:center">
+                            @Html.Label("Стоимость")
+                        </th>
+                        <th colspan="2" style="text-align:center">
+                            @Html.Label("Комментарий")
+                        </th>
+                    </tr>
+                    <tr name=@item.CarId style="display:none; background-color:#FFFAFA;">
+                        <td colspan="2" style="text-align:center">
+                            @Html.Label(client.Surname + " " + client.Name + " " + client.Patronymic)
+                        </td>
+                        <td style="text-align:center">
+                            @Html.DisplayFor(modelItem => client.DateOfBirth.Year)
+                        </td>
+                        <td colspan="2" style="text-align:center">
+                            @Html.DisplayFor(modelItem => client.Telephone)
+                        </td>
+                        <td style="text-align:center" class="points">
+                            @Html.DisplayFor(modelItem => client.EndCoordinates)
+                        </td>
+                        <td style="text-align:center">
+                            @Html.DisplayFor(modelItem => client.TotalCost)
+                        </td>
+                        <td colspan="2" style="text-align:center">
+                            @Html.DisplayFor(modelItem => client.Comments)
+                        </td>
+                    </tr>
+                }
+                    <tr>
+                        <td>
+                            <button class="myButtonStyle btn btn-default" onclick="showElements(@item.id);"> Показать точки </button>
+                        </td>
+                        <td>
+                            <button class="myButtonStyle btn btn-default" onclick="showElements(@item.CarId);" type="button" value=""> Клиенты </button>
+                        </td>
+                        <td>
+                            @Html.ActionLink("Удалить маршрут", "DeleteTrip", new { id = item.id }, new { @class = "myButtonStyle btn btn-default" })
+                        </td>
+                        <td>
+                            @Html.ActionLink("Заверишть маршрут", "CompleteTrip", new { id = item.id }, new { @class = "myButtonStyle btn btn-default" })
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                <tr></tr>
+            }
+
+        </table>
+        @Html.ActionLink("Добавить", "CreateRoute", null, new { @class = "btn btn-default", style = "margin-bottom:25px;" })
+    }
+    else
+    {
+        <h2> У вас нет ни одного активного маршрута</h2>
+        @Html.ActionLink("Добавить", "CreateRoute", null, new { @class = "btn btn-default", style = "margin-top:25px;" })
+    }
+}
+
+<script>
+    function showElements(itemId) {
+        var arr = document.getElementsByName(itemId);
+        arr.forEach(function (element) {
+            console.log(element.style.display);
+            if (element.style.display == "none" || element.style.display == "") {
+                element.style.display = "table-row";
+            }
+            else {
+                element.style.display = "none";
+            }
+        });
+    }
+
+
+    $('.points').each(function () {
+        SearchPlace(this);
+    });
+
+
+    function SearchPlace(label) {
+        var coordinates = label.innerText.split(',');
+        latitude = coordinates[1];
+        longitude = coordinates[0];
+
+        var request = new XMLHttpRequest();
+        var url = "https://places-dsn.algolia.net/1/places/reverse?aroundLatLng=" + latitude + "," + longitude + "&hitsPerPage=5&language=ru";
+        request.abort();
+        request.open('GET', url, true);
+        request.send();
+
+        request.onload = function () {
+            if (request.status >= 200 && request.status < 400) {
+                var data = JSON.parse(request.responseText);
+                label.innerHTML = data.hits[0].country + ", " + data.hits[0].locale_names[0];
+            }
+        };
+    };
+</script>

@@ -1,0 +1,256 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RideSharingAppDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AccountsInformation">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="DynamicSalt" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Clients" Relationship="Self.FK__Clients__Account__59FA5E80" FromRole="AccountsInformation" ToRole="Clients" />
+    <NavigationProperty Name="Drivers" Relationship="Self.FK__Drivers__Account__4BAC3F29" FromRole="AccountsInformation" ToRole="Drivers" />
+  </EntityType>
+  <EntityType Name="Cars">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Mark" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Model" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="YearOfIssue" Type="Int32" />
+    <Property Name="RegistrationNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Comments" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Deleted" Type="Boolean" />
+    <Property Name="DriverID" Type="Int64" />
+    <NavigationProperty Name="Drivers" Relationship="Self.FK__Cars__DriverID__5165187F" FromRole="Cars" ToRole="Drivers" />
+    <NavigationProperty Name="Trips" Relationship="Self.FK__Trips__CarID__5441852A" FromRole="Cars" ToRole="Trips" />
+  </EntityType>
+  <EntityType Name="Clients">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DateOfRegistration" Type="DateTime" Precision="0" />
+    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Surname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Patronymic" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
+    <Property Name="Telephone" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Comments" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Enabled" Type="Boolean" />
+    <Property Name="ReasonForBlocking" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="AccountInformationID" Type="Int64" />
+    <NavigationProperty Name="AccountsInformation" Relationship="Self.FK__Clients__Account__59FA5E80" FromRole="Clients" ToRole="AccountsInformation" />
+    <NavigationProperty Name="Companions" Relationship="Self.FK__Companion__Clien__5CD6CB2B" FromRole="Clients" ToRole="Companions" />
+  </EntityType>
+  <EntityType Name="Companions">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClientID" Type="Int64" />
+    <Property Name="PassingPointID" Type="Int64" />
+    <NavigationProperty Name="Clients" Relationship="Self.FK__Companion__Clien__5CD6CB2B" FromRole="Companions" ToRole="Clients" />
+    <NavigationProperty Name="PassingPoints" Relationship="Self.FK__Companion__Passi__5DCAEF64" FromRole="Companions" ToRole="PassingPoints" />
+  </EntityType>
+  <EntityType Name="Drivers">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DateOfRegistration" Type="DateTime" Precision="0" />
+    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Surname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Patronymic" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
+    <Property Name="Telephone" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Comments" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Enabled" Type="Boolean" />
+    <Property Name="ReasonForBlocking" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="AccountInformationID" Type="Int64" />
+    <NavigationProperty Name="AccountsInformation" Relationship="Self.FK__Drivers__Account__4BAC3F29" FromRole="Drivers" ToRole="AccountsInformation" />
+    <NavigationProperty Name="Cars" Relationship="Self.FK__Cars__DriverID__5165187F" FromRole="Drivers" ToRole="Cars" />
+    <NavigationProperty Name="DriversLicenses" Relationship="Self.FK__DriversLi__Drive__4E88ABD4" FromRole="Drivers" ToRole="DriversLicenses" />
+  </EntityType>
+  <EntityType Name="DriversLicenses">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DateOfReceiving" Type="DateTime" Precision="0" />
+    <Property Name="ExpirationDate" Type="DateTime" Precision="0" />
+    <Property Name="DriverLicensesNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="IssuingAuthority" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Categories" Type="Int32" />
+    <Property Name="DriverID" Type="Int64" />
+    <NavigationProperty Name="Drivers" Relationship="Self.FK__DriversLi__Drive__4E88ABD4" FromRole="DriversLicenses" ToRole="Drivers" />
+  </EntityType>
+  <EntityType Name="PassingPoints">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OriginCoordinates" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="EndCoordinates" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="DateAndTimeOfDepartue" Type="DateTime" Precision="3" />
+    <Property Name="DateAndTimeOfArrival" Type="DateTime" Precision="3" />
+    <Property Name="Cost" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="PointNumberOfThisTrip" Type="Int32" />
+    <Property Name="Periodic" Type="Boolean" />
+    <Property Name="TripID" Type="Int64" />
+    <NavigationProperty Name="Companions" Relationship="Self.FK__Companion__Passi__5DCAEF64" FromRole="PassingPoints" ToRole="Companions" />
+    <NavigationProperty Name="Trips" Relationship="Self.FK__PassingPo__TripI__571DF1D5" FromRole="PassingPoints" ToRole="Trips" />
+  </EntityType>
+  <EntityType Name="Trips">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NumberOfSeats" Type="Int32" />
+    <Property Name="Status" Type="Int32" />
+    <Property Name="RegistrationEndDate" Type="DateTime" Precision="0" />
+    <Property Name="Periodic" Type="Boolean" />
+    <Property Name="CarID" Type="Int64" />
+    <NavigationProperty Name="Cars" Relationship="Self.FK__Trips__CarID__5441852A" FromRole="Trips" ToRole="Cars" />
+    <NavigationProperty Name="PassingPoints" Relationship="Self.FK__PassingPo__TripI__571DF1D5" FromRole="Trips" ToRole="PassingPoints" />
+  </EntityType>
+  <Association Name="FK__Clients__Account__59FA5E80">
+    <End Role="AccountsInformation" Type="Self.AccountsInformation" Multiplicity="0..1" />
+    <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccountsInformation">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Clients">
+        <PropertyRef Name="AccountInformationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Drivers__Account__4BAC3F29">
+    <End Role="AccountsInformation" Type="Self.AccountsInformation" Multiplicity="0..1" />
+    <End Role="Drivers" Type="Self.Drivers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccountsInformation">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Drivers">
+        <PropertyRef Name="AccountInformationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Cars__DriverID__5165187F">
+    <End Role="Drivers" Type="Self.Drivers" Multiplicity="0..1" />
+    <End Role="Cars" Type="Self.Cars" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Drivers">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Cars">
+        <PropertyRef Name="DriverID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Trips__CarID__5441852A">
+    <End Role="Cars" Type="Self.Cars" Multiplicity="0..1" />
+    <End Role="Trips" Type="Self.Trips" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cars">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Trips">
+        <PropertyRef Name="CarID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Companion__Clien__5CD6CB2B">
+    <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
+    <End Role="Companions" Type="Self.Companions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clients">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Companions">
+        <PropertyRef Name="ClientID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Companion__Passi__5DCAEF64">
+    <End Role="PassingPoints" Type="Self.PassingPoints" Multiplicity="0..1" />
+    <End Role="Companions" Type="Self.Companions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PassingPoints">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Companions">
+        <PropertyRef Name="PassingPointID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DriversLi__Drive__4E88ABD4">
+    <End Role="Drivers" Type="Self.Drivers" Multiplicity="0..1" />
+    <End Role="DriversLicenses" Type="Self.DriversLicenses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Drivers">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="DriversLicenses">
+        <PropertyRef Name="DriverID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PassingPo__TripI__571DF1D5">
+    <End Role="Trips" Type="Self.Trips" Multiplicity="0..1" />
+    <End Role="PassingPoints" Type="Self.PassingPoints" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Trips">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="PassingPoints">
+        <PropertyRef Name="TripID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DefaultConnection" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AccountsInformation" EntityType="Self.AccountsInformation" />
+    <EntitySet Name="Cars" EntityType="Self.Cars" />
+    <EntitySet Name="Clients" EntityType="Self.Clients" />
+    <EntitySet Name="Companions" EntityType="Self.Companions" />
+    <EntitySet Name="Drivers" EntityType="Self.Drivers" />
+    <EntitySet Name="DriversLicenses" EntityType="Self.DriversLicenses" />
+    <EntitySet Name="PassingPoints" EntityType="Self.PassingPoints" />
+    <EntitySet Name="Trips" EntityType="Self.Trips" />
+    <AssociationSet Name="FK__Clients__Account__59FA5E80" Association="Self.FK__Clients__Account__59FA5E80">
+      <End Role="AccountsInformation" EntitySet="AccountsInformation" />
+      <End Role="Clients" EntitySet="Clients" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Drivers__Account__4BAC3F29" Association="Self.FK__Drivers__Account__4BAC3F29">
+      <End Role="AccountsInformation" EntitySet="AccountsInformation" />
+      <End Role="Drivers" EntitySet="Drivers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Cars__DriverID__5165187F" Association="Self.FK__Cars__DriverID__5165187F">
+      <End Role="Drivers" EntitySet="Drivers" />
+      <End Role="Cars" EntitySet="Cars" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Trips__CarID__5441852A" Association="Self.FK__Trips__CarID__5441852A">
+      <End Role="Cars" EntitySet="Cars" />
+      <End Role="Trips" EntitySet="Trips" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Companion__Clien__5CD6CB2B" Association="Self.FK__Companion__Clien__5CD6CB2B">
+      <End Role="Clients" EntitySet="Clients" />
+      <End Role="Companions" EntitySet="Companions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Companion__Passi__5DCAEF64" Association="Self.FK__Companion__Passi__5DCAEF64">
+      <End Role="PassingPoints" EntitySet="PassingPoints" />
+      <End Role="Companions" EntitySet="Companions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DriversLi__Drive__4E88ABD4" Association="Self.FK__DriversLi__Drive__4E88ABD4">
+      <End Role="Drivers" EntitySet="Drivers" />
+      <End Role="DriversLicenses" EntitySet="DriversLicenses" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PassingPo__TripI__571DF1D5" Association="Self.FK__PassingPo__TripI__571DF1D5">
+      <End Role="Trips" EntitySet="Trips" />
+      <End Role="PassingPoints" EntitySet="PassingPoints" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

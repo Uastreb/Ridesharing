@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RideSharingAPP.DAL</name>
+    </assembly>
+    <members>
+        <member name="T:RideSharingApp.DAL.Repositories.UnitOfWork">
+            <summary>Class providing database connection.</summary>
+        </member>
+        <member name="M:RideSharingApp.DAL.Repositories.UnitOfWork.#ctor(System.String)">
+            <summary>Provides a connection to the database.</summary>
+        </member>
+        <member name="P:RideSharingApp.DAL.Repositories.UnitOfWork.Cars">
+            <summary>Work with Cars table in the database.</summary>
+        </member>
+        <member name="P:RideSharingApp.DAL.Repositories.UnitOfWork.Drivers">
+            <summary>Work with Drivers table in the database.</summary>
+        </member>
+        <member name="P:RideSharingApp.DAL.Repositories.UnitOfWork.Clients">
+            <summary>Work with Clients table in the database.</summary>
+        </member>
+        <member name="P:RideSharingApp.DAL.Repositories.UnitOfWork.DriversLicenses">
+            <summary>Work with DriversLicenses table in the database.</summary>
+        </member>
+        <member name="P:RideSharingApp.DAL.Repositories.UnitOfWork.Trips">
+            <summary>Work with Trips table in the database.</summary>
+        </member>
+        <member name="P:RideSharingApp.DAL.Repositories.UnitOfWork.PassingPoints">
+            <summary>Work with PassingPoints table in the database.</summary>
+        </member>
+        <member name="P:RideSharingApp.DAL.Repositories.UnitOfWork.AccountsInformation">
+            <summary>Work with AccountsInformation table in the database.</summary>
+        </member>
+        <member name="P:RideSharingApp.DAL.Repositories.UnitOfWork.Companions">
+            <summary>Work with Companions table in the database.</summary>
+        </member>
+        <member name="M:RideSharingApp.DAL.Repositories.UnitOfWork.Commit">
+            <summary>Saving changes to the database.</summary>
+        </member>
+        <member name="M:RideSharingApp.DAL.Repositories.UnitOfWork.resetRepositories">
+            <summary>Clearing repositories.</summary>
+        </member>
+        <member name="F:RideSharingApp.DAL.Repositories.UnitOfWork.disposedValue">
+            <summary>Check dispose.</summary>
+        </member>
+        <member name="M:RideSharingApp.DAL.Repositories.UnitOfWork.Dispose(System.Boolean)">
+            <summary>Delete database connections.</summary>
+        </member>
+        <member name="M:RideSharingApp.DAL.Repositories.UnitOfWork.Dispose">
+            <summary>Delete database connections.</summary>
+        </member>
+        <member name="M:RideSharingApp.DAL.Repositories.UnitOfWork.Finalize">
+            <summary>Destructor unit of works.</summary>
+        </member>
+    </members>
+</doc>

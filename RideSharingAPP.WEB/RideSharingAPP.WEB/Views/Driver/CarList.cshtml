@@ -1,0 +1,99 @@
+﻿@model IEnumerable<RideSharingAPP.WEB.Models.Car.CarViewModel>
+
+@{
+    Layout = "~/Views/Shared/_LayoutDriver.cshtml";
+    ViewBag.Title = "CarList";
+}
+
+<style>
+
+    .commentStyle {
+        width: 30%;
+    }
+
+    .registrationNumberStyle {
+        width: 7%;
+    }
+
+    .yearOfIssueStyle {
+        margin-left: 20px;
+        width: 3%;
+    }
+
+    .modelStyle {
+        width: 12.5%;
+    }
+
+    .markStyle {
+        width: 12.5%;
+    }
+
+    .leftBtnStyle {
+        padding-top: 3px;
+        padding-bottom: 3px;
+        margin-left: 20px;
+        margin-right: 0px;
+    }
+
+    .rightBtnStyle {
+        padding-top: 3px;
+        padding-bottom: 3px;
+        margin-left: 20px;
+        margin-right: 0px;
+    }
+</style>
+
+@{ 
+    IEnumerable<ModelError> allErrors = ViewData.ModelState.Values.SelectMany(v => v.Errors);
+}
+
+@Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <table class="table">
+        <tr>
+            <th class="markStyle">
+                @Html.DisplayNameFor(model => model.Mark)
+            </th>
+            <th class="modelStyle">
+                @Html.DisplayNameFor(model => model.Model)
+            </th>
+            <th class="yearOfIssueStyle">
+                @Html.DisplayNameFor(model => model.YearOfIssue)
+            </th>
+            <th class="registrationNumberStyle">
+                @Html.DisplayNameFor(model => model.RegistrationNumber)
+            </th>
+            <th class="commentStyle">
+                @Html.DisplayNameFor(model => model.Comments)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="markStyle">
+                    @Html.DisplayFor(modelItem => item.Mark)
+                </td>
+                <td class="modelStyle">
+                    @Html.DisplayFor(modelItem => item.Model)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.YearOfIssue)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RegistrationNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Comments)
+                </td>
+                <td>
+                    <div>
+                        @Html.ActionLink("Изменить", "EditCar", new { id = item.id }, new { @class = "btn btn-default" })
+                        @Html.ActionLink("Удалить", "DeleteCar", new { id = item.id }, new { @class = "btn btn-default" })
+                    </div>
+                </td>
+            </tr>
+        }
+
+    </table>

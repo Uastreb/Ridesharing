@@ -1,0 +1,72 @@
+﻿@model RideSharingAPP.WEB.Models.Client.ClientViewModel
+@{
+    Layout = "~/Views/Shared/_LayoutClient.cshtml";
+    ViewBag.Title = "PersonalArea";
+}
+@Html.AntiForgeryToken()
+<div>
+    <h4>Данные о учетной записи</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.Label("Вы зарегестрированы")
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DateOfRegistration.Date)
+        </dd>
+        <dt>
+            @Html.Label("Имя")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.Label("Фамилия")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Surname)
+        </dd>
+
+        <dt>
+            @Html.Label("Отчество")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Patronymic)
+        </dd>
+
+        <dt>
+            @Html.Label("Дата рождения")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOfBirth.Date)
+        </dd>
+
+        <dt>
+            @Html.Label("Номер телефона")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Telephone)
+        </dd>
+
+        <dt>
+            @Html.Label("Комментарий для пользователей")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comments)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Изменить данные учетной записи", "EditClient", new { id = Model.id }, new { @class = "btn btn-default" })
+</p>
+<p>
+    @Html.ActionLink("Изменить пароль", "ChangePassword", new { id = Model.id }, new { @class = "btn btn-default" })
+</p>

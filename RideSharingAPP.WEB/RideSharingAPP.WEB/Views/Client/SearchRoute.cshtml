@@ -1,0 +1,299 @@
+﻿@model RideSharingAPP.WEB.Models.Route.PointsViewModel
+@{
+    Layout = "~/Views/Shared/_LayoutClient.cshtml";
+    ViewBag.Title = "SearchRoute";
+}
+
+<head>
+    <meta charset='utf-8' />
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.3.2/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.3.2/mapbox-gl.css' rel='stylesheet' />
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+    <link href="~/Content/Passenger(TripSearch)/CustomPassengerRouteStyles(Search).css" rel="stylesheet" />
+</head>
+<body>
+
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.0/mapbox-gl.css' rel='stylesheet' />
+    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.1/mapbox-gl-geocoder.min.js'></script>
+    <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.1/mapbox-gl-geocoder.css' type='text/css' />
+    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.0.2/mapbox-gl-directions.js'></script>
+    <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.0.2/mapbox-gl-directions.css' type='text/css' />
+    <link rel="canonical" href="https://labs.mapbox.com/bites/00321/">
+    <script src="https://d3js.org/d3-queue.v3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/places.js@1.16.4"></script>
+
+
+    <div class="wrapper">
+        <div class="left_block">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+
+                @Html.Label("Выберите точку отправки", new { @value = "", @id = "startPoint" })
+                @Html.Editor("coordinatesStarts", new { htmlAttributes = new { @class = "textboxSearch", type = "search", id = "address-input", placeholder = "Введите адрес", onchange = "getRoute();" } })
+                @Html.ValidationMessageFor(model => model.OriginCoordinates, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.OriginCoordinates , new { id = "point1" })
+            <p></p>
+                @Html.Label("Выберите конечную точку", new { @value = "", @id = "finishPoint", @class = "labelEndPoint" })
+                @Html.Editor("addressEnd", new { htmlAttributes = new { @class = "textboxSearch", type = "search", id = "address-input1", placeholder = "Введите адрес", onchange = "getRoute();" } })
+                @Html.ValidationMessageFor(model => model.EndCoordinates, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.EndCoordinates, new { id = "point2" })
+                <p></p>
+                <input type="submit" value="Найти" class="btn btn-default sumbbuttoncontroll" id="sumbitBut" />
+            }
+        </div>
+
+        <div class="right_block">
+            <div id="map"></div>
+        </div>
+    </div>
+
+    <script>
+        var start = 0;
+        var end = 0;
+        document.getElementById('point1').value = "";
+        document.getElementById('point2').value = "";
+
+
+        (function () {
+            var placesAutocomplete = places({
+                appId: 'plI6T90SY476',
+                apiKey: 'e7e9bed37c9bc906cfe8f5d15f03b745',
+                container: document.querySelector('#address-input')
+            });
+
+
+            var $address = document.querySelector('#address-input')
+            placesAutocomplete.on('change', function (e) {
+                start = [e.suggestion.latlng.lng, e.suggestion.latlng.lat];
+                document.getElementById('point1').value = start;
+                getRoute();
+            });
+
+            placesAutocomplete.on('clear', function () {
+                $address.textContent = 'none';
+                start = "";
+            });
+
+        })();
+
+        document.getElementById('address-input').addEventListener('change', function () {
+            map.flyTo({
+                center: start,
+                zoom: 12.5
+            });
+        });
+
+
+        (function () {
+            var placesAutocomplete = places({
+                appId: 'plI6T90SY476',
+                apiKey: 'e7e9bed37c9bc906cfe8f5d15f03b745',
+                container: document.querySelector('#address-input1')
+            });
+
+
+            var $address = document.querySelector('#address-input1')
+            placesAutocomplete.on('change', function (e) {
+                end = [e.suggestion.latlng.lng, e.suggestion.latlng.lat];
+                document.getElementById('point2').value = end;
+                getRoute();
+            });
+
+            placesAutocomplete.on('clear', function () {
+                $address.textContent = 'none';
+                end = "";
+            });
+        })();
+
+        document.getElementById('address-input1').addEventListener('change', function () {
+            map.flyTo({
+                center: end,
+                zoom: 12.5
+            });
+        });
+
+        var pointX = 27.948;
+        var pointY = 53.663;
+        var pointZoom = 5.25;
+        mapboxgl.accessToken = 'pk.eyJ1IjoidWFzdHJlYiIsImEiOiJjazExcWJ0NW4waHc4M25wNmI1aXIwcWRnIn0.HfABZtci9yWVEfd_20QCWQ';
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: [pointX, pointY],
+            zoom: pointZoom,
+            hash: true
+        });
+
+
+        map.addControl(new mapboxgl.NavigationControl());
+
+
+        var api = 'https://api.mapbox.com/directions/v5/';
+        var profiles = {
+            driving: {
+                color: '#3bb2d0'
+            }
+        };
+
+
+        function getRoute() {
+            if (start != null && end != null) {
+                clearMap();
+                go();
+            }
+        }
+
+        function go() {
+
+            if (!map.getSource('start')) {
+                map.addSource('start', {
+                    type: 'geojson',
+                    data: {
+                        type: 'Point',
+                        coordinates: [start[0], start[1]]
+                    }
+                });
+
+                map.addLayer({
+                    'id': 'start',
+                    'type': 'circle',
+                    'source': 'start',
+                    'layout': {},
+                    'paint': {
+                        'circle-radius': 10,
+                        'circle-color': profiles.driving.color
+                    }
+                });
+            }
+
+            if (end === start) {
+                end = null;
+                return
+            }
+
+            map.addSource('end', {
+                type: 'geojson',
+                data: {
+                    type: 'Point',
+                    coordinates: [end[0], end[1]]
+                }
+            });
+            map.addLayer({
+                'id': 'end',
+                'type': 'circle',
+                'source': 'end',
+                'layout': {},
+                'paint': {
+                    'circle-radius': 10,
+                    'circle-color': profiles.driving.color
+                }
+            });
+
+
+            if (start && end) requestProfiles(start, end, Object.keys(profiles));
+        }
+
+        function requestProfiles() {
+            var queue = d3.queue();
+
+            Object.keys(profiles).forEach(function (profile) {
+                queue.defer(route, start, end, profile);
+            });
+
+            queue.awaitAll(function (error, results) {
+                results.forEach(function (result) {
+                    if (result && result.profile) {
+                        profiles[result.profile].route = result.routes[0];
+                    }
+                })
+                draw();
+            });
+
+            function route(start, end, profile, cb) {
+                var startEnd = encodeURIComponent(start + ';' + end);
+                var request = new XMLHttpRequest();
+                var url = api + 'mapbox/' + profile + '/' + startEnd + '.json?access_token=pk.eyJ1IjoiYWFyb25saWRtYW4iLCJhIjoiNTVucTd0TSJ9.wVh5WkYXWJSBgwnScLupiQ&geometries=geojson&overview=full';
+
+                request.abort();
+                request.open('GET', url, true);
+                request.send();
+
+                request.onload = function () {
+                    if (request.status >= 200 && request.status < 400) {
+                        var data = JSON.parse(request.responseText);
+                        if (data.error) {
+                            console.log('error');
+                            return clear();
+                        }
+                        data.profile = profile;
+                        return cb(null, data);
+                    } else {
+                        // never actually error
+                        return cb(null, false);
+                    }
+                };
+
+                request.onerror = function () {
+                    return cb(null, false);
+                };
+            }
+        }
+
+        function draw() {
+            var bounds = new mapboxgl.LngLatBounds(start, end);
+
+            Object.keys(profiles).forEach(function (profile, idx) {
+                map.addSource(profile + ' route', {
+                    type: 'geojson',
+                    data: profiles[profile].route.geometry
+                });
+                var route = {
+                    'id': profile + ' route',
+                    'type': 'line',
+                    'source': profile + ' route',
+                    'layout': {
+                        'line-join': 'round',
+                        'line-cap': 'round'
+                    },
+                    'paint': {
+                        'line-color': profiles[profile].color,
+                        'line-width': 4,
+                        'line-opacity': 1
+                    }
+                };
+                map.addLayer(route, 'start');
+
+                var result = profiles[profile].route.geometry.coordinates.reduce(function (previous, current) {
+                    return bounds.extend(current);
+                });
+            });
+
+            map.fitBounds(bounds, {
+                padding: 100
+            });
+        }
+
+        function clearMap() {
+            Object.keys(profiles).forEach(function (profile) {
+                if (map.getLayer(profile + ' route')) map.removeLayer(profile + ' route');
+                if (map.getSource(profile + ' route')) map.removeSource(profile + ' route');
+            });
+
+            ['start', 'end'].forEach(function (item) {
+                if (map.getLayer(item)) map.removeLayer(item);
+                if (map.getSource(item)) map.removeSource(item);
+            });
+        }
+
+
+
+    </script>
+
+
+
+</body>

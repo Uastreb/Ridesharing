@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RideSharingAPP.BLL</name>
+    </assembly>
+    <members>
+        <member name="T:RideSharingAPP.BLL.Interfaces.IValidations.IAccountInformationValidation">
+            <summary>Account validation service interface.</summary>
+        </member>
+        <member name="M:RideSharingAPP.BLL.Interfaces.IValidations.IAccountInformationValidation.IsValidAuthorization(RideSharingAPP.BLL.DTO.AccountInformationDTO.AccountInformationDTOCreditionals)">
+            <summary>Validation of authorization model.</summary>
+        </member>
+        <member name="M:RideSharingAPP.BLL.Interfaces.IValidations.IAccountInformationValidation.IsValidRegistration(RideSharingAPP.BLL.DTO.AccountInformationDTO.AccountInformationDTOCreditionals)">
+            <summary>Validation of registration model.</summary>
+        </member>
+        <member name="M:RideSharingAPP.BLL.Interfaces.IValidations.IAccountInformationValidation.IsValidPasswordRecovery(RideSharingAPP.BLL.DTO.AccountInformationDTO.AccountInformationDTOGetEmail)">
+            <summary>Validation of password recovery model.</summary>
+        </member>
+        <member name="M:RideSharingAPP.BLL.Interfaces.IValidations.IAccountInformationValidation.IsValidChangePassword(RideSharingAPP.BLL.DTO.AccountInformationDTO.AccountInformationDTOChangePassword)">
+            <summary>Validation of password change model.</summary>
+        </member>
+        <member name="T:RideSharingAPP.BLL.Interfaces.IValidations.ICarValidation">
+            <summary>Car validation service interface.</summary>
+        </member>
+        <member name="M:RideSharingAPP.BLL.Interfaces.IValidations.ICarValidation.IsValid(RideSharingAPP.BLL.DTO.CarDTO.CarDTOCreate)">
+            <summary>Validation of car model.</summary>
+        </member>
+        <member name="M:RideSharingAPP.BLL.Interfaces.IValidations.ICarValidation.EditCarModelIsValid(RideSharingAPP.BLL.DTO.CarDTO.CarDTOCreate)">
+            <summary>Validation of changes to the car comment.</summary>
+        </member>
+        <member name="M:RideSharingAPP.BLL.Interfaces.IValidations.ICarValidation.DeleteCarIsValid(System.Int32)">
+            <summary>Check for active vehicle routes before deletingt.</summary>
+        </member>
+        <member name="T:RideSharingAPP.BLL.Interfaces.IValidations.IClientValidation">
+            <summary>Client validation service interface.</summary>
+        </member>
+        <member name="M:RideSharingAPP.BLL.Interfaces.IValidations.IClientValidation.IsValid(RideSharingAPP.BLL.DTO.ClientDTO.ClientDTOCreate)">
+            <summary>Customer model validation.</summary>
+        </member>
+        <member name="T:RideSharingAPP.BLL.Interfaces.IValidations.ICompanionValidation">
+            <summary>Companion validation service interface.</summary>
+        </member>
+        <member name="M:RideSharingAPP.BLL.Interfaces.IValidations.ICompanionValidation.IsValid(System.Int32,System.Int32,System.Int32)">
+            <summary>check that the user cannot register on his own route, register on a route 
+            where there are no seats, register on the route for which the registration date has ended.</summary>
+        </member>
+        <member name="M:RideSharingAPP.BLL.Interfaces.IValidations.ICompanionValidation.CheckId(System.Nullable{System.Int32})">
+            <summary>Сheck if there is a companion with such id and if id is not null.</summary>
+        </member>
+        <member name="M:RideSharingAPP.BLL.Interfaces.IValidations.IDriverLicensesValidation.IsValid(RideSharingAPP.BLL.DTO.DriverLicensesDTO.DriverLicensesDTOCreate)">
+            <summary>Checking the correctness of the date of issue of rights and filling in all other fields.</summary>
+        </member>
+    </members>
+</doc>

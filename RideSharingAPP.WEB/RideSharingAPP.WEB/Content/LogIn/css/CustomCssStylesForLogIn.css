@@ -1,0 +1,65 @@
+﻿body {
+    padding-left: 0px;
+    margin-left: 0px;
+    padding-bottom: 0px;
+    margin-top: 0px;
+    box-sizing: content-box;
+}
+
+.logInFormStyle{
+    padding-left:20px;
+    padding-right:20px;
+}
+
+/*.imageStyle {
+    height:50%;
+}*/
+
+
+div.wrapper {
+    /*width: 100%;
+    height: 100%;*/
+}
+
+div.left_block {
+    margin-left: 50px;
+    margin-right: 25px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: block;
+    float: left;
+    width: 45%;
+    height: 95%;
+}
+
+div.right_block {
+    float: right;
+    width: 30%;
+    margin-top:150px;
+    margin-right:250px;
+}
+
+
+html, body, #map {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.textBoxStyle {
+    max-width: 90%;
+    display: block;
+    width: 425px;
+    background: transparent;
+    font-family: Poppins-Regular;
+    font-size: 18px;
+    color: #666666;
+    line-height: 1.2;
+    padding: 0 25px;
+}
+
+.myradiostyle {
+    margin-top: 20px;
+    margin-left: 25px;
+}

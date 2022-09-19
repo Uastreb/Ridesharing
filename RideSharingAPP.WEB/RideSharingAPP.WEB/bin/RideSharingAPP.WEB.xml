@@ -1,0 +1,155 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RideSharingAPP.WEB</name>
+    </assembly>
+    <members>
+        <member name="M:RideSharingAPP.WEB.App_Start.NinjectWebCommon.Start">
+            <summary>
+            Starts the application
+            </summary>
+        </member>
+        <member name="M:RideSharingAPP.WEB.App_Start.NinjectWebCommon.Stop">
+            <summary>
+            Stops the application.
+            </summary>
+        </member>
+        <member name="M:RideSharingAPP.WEB.App_Start.NinjectWebCommon.CreateKernel">
+            <summary>
+            Creates the kernel that will manage your application.
+            </summary>
+            <returns>The created kernel.</returns>
+        </member>
+        <member name="M:RideSharingAPP.WEB.App_Start.NinjectWebCommon.RegisterServices(Ninject.IKernel)">
+            <summary>
+            Load your modules or register your services here!
+            </summary>
+            <param name="kernel">The kernel.</param>
+        </member>
+        <member name="T:RideSharingAPP.WEB.Controllers.DriverController">
+            <summary>The controller in which all actions will be carried out by the passenger.</summary>
+        </member>
+        <member name="M:RideSharingAPP.WEB.Controllers.DriverController.#ctor(RideSharingAPP.BLL.Interfaces.IDriverService,RideSharingAPP.BLL.Interfaces.ICarService,RideSharingAPP.BLL.Interfaces.IDriverLicensesService,RideSharingAPP.BLL.Interfaces.ITripService,RideSharingAPP.BLL.Interfaces.IPassingPointService,RideSharingAPP.BLL.Interfaces.IValidations.ICarValidation,RideSharingAPP.BLL.Interfaces.IValidations.IDriverValidation,RideSharingAPP.BLL.Interfaces.IValidations.IDriverLicensesValidation,RideSharingAPP.BLL.Interfaces.IValidations.ITripValidation,RideSharingAPP.BLL.Interfaces.IValidations.IPassingPointValidation,RideSharingAPP.BLL.Interfaces.IValidations.IAccountInformationValidation,RideSharingApp.BLL.Interfaces.IAccountInformationService,RideSharingAPP.BLL.Interfaces.ICompanionService,RideSharingAPP.BLL.Interfaces.IValidations.ICompanionValidation)">
+            <summary>Controller constructor.</summary>
+            <value>Accepts the interface of the validation service as well as the service tables of: drivers, drivers licenses, cars.</value>
+            <remarks>Constructor - a function that fires before other constructor methods.</remarks>
+        </member>
+        <member name="M:RideSharingAPP.WEB.Controllers.DriverController.Index">
+            <summary>Checks the availability of data about the driver, his driver’s license and the car, if no data are redirected to the forms to fill.</summary>
+            <returns>View() or Redirect()</returns>
+        </member>
+        <member name="M:RideSharingAPP.WEB.Controllers.DriverController.CreateCar">
+            <summary>Returns the form of creating a new car.</summary>
+            <remarks>Displays a form for filling in data about a new car.</remarks>
+            <returns>View()</returns>
+        </member>
+        <member name="M:RideSharingAPP.WEB.Controllers.DriverController.CreateDriverLicenses">
+            <summary>Returns the form of creating out driver license information.</summary>
+            <remarks>Displays a form for filling out driver license information.</remarks>
+            <returns>View()</returns>
+        </member>
+        <member name="M:RideSharingAPP.WEB.Controllers.DriverController.CreateDriverLicenses(RideSharingAPP.WEB.Models.DriverLicenses.DriverLicensesViewModel)">
+            <summary>Sends data about a new driver license information to the server.</summary>
+            <param name="driverLicense"> model containing data about a new driver licenses information.</param>
+        </member>
+        <member name="M:RideSharingAPP.WEB.Controllers.DriverController.CreateCar(RideSharingAPP.WEB.Models.Car.CarViewModel)">
+            <summary>Sends data about a new car to the server.</summary>
+            <param name="car"> model containing data about a new car.</param>
+        </member>
+        <member name="M:RideSharingAPP.WEB.Controllers.DriverController.Create">
+            <summary>Returns the form of creating a new driver.</summary>
+            <remarks>Displays a form for filling out driver license information.</remarks>
+            <returns>View()</returns>
+        </member>
+        <member name="M:RideSharingAPP.WEB.Controllers.DriverController.Create(RideSharingAPP.WEB.Models.Driver.DriverCreateViewModel)">
+            <summary>Sends data about a new driver to the server.</summary>
+            <param name="driver"> model containing data about a new driver.</param>
+        </member>
+        <member name="M:RideSharingAPP.WEB.Controllers.DriverController.Dispose(System.Boolean)">
+            <summary>Invokes a method to free database connection memory.</summary>
+        </member>
+        <member name="T:RideSharingAPP.WEB.Controllers.ClientController">
+            <summary>The controller in which all actions will be carried out by the passenger.</summary>
+        </member>
+        <member name="M:RideSharingAPP.WEB.Controllers.ClientController.#ctor(RideSharingAPP.BLL.Interfaces.IClientService,RideSharingAPP.BLL.Interfaces.IValidations.IClientValidation,RideSharingAPP.BLL.Interfaces.IValidations.ITripValidation,RideSharingAPP.BLL.Interfaces.ITripService,RideSharingAPP.BLL.Interfaces.IDriverService,RideSharingAPP.BLL.Interfaces.IValidations.IDriverValidation,RideSharingAPP.BLL.Interfaces.ICarService,RideSharingAPP.BLL.Interfaces.IValidations.ICarValidation,RideSharingAPP.BLL.Interfaces.ICompanionService,RideSharingAPP.BLL.Interfaces.IValidations.ICompanionValidation,RideSharingApp.BLL.Interfaces.IAccountInformationService,RideSharingAPP.BLL.Interfaces.IValidations.IAccountInformationValidation)">
+            <summary>Controller constructor.</summary>
+            <value>Accepts the interface of the validation service as well as the service table of clients.</value>
+            <remarks>Constructor - a function that fires before other constructor methods.</remarks>
+        </member>
+        <member name="M:RideSharingAPP.WEB.Controllers.ClientController.Create(RideSharingAPP.WEB.Models.Client.ClientViewModel)">
+            <summary>Sends data about a new user to the server</summary>
+            <param name="client"> model containing data about a new user.</param>
+        </member>
+        <member name="M:RideSharingAPP.WEB.Controllers.ClientController.Create">
+            <summary>Returns the form of creating a new client.</summary>
+            <remarks>Displays a form for filling in data about a new user.</remarks>
+            <returns>View()</returns>
+        </member>
+        <member name="M:RideSharingAPP.WEB.Controllers.ClientController.IsExistClientData">
+            <summary>Checks for customer data in the database, if there is no data, sends it to the data filling form.</summary>
+            <returns>View() or Redirect()</returns>
+        </member>
+        <member name="M:RideSharingAPP.WEB.Controllers.ClientController.Dispose(System.Boolean)">
+            <summary>Invokes a method to free database connection memory.</summary>
+        </member>
+        <member name="P:RideSharingAPP.WEB.Models.Authorization.ChangePasswordViewModel.Password">
+            <summary>Field storing user password.</summary>
+        </member>
+        <member name="T:RideSharingAPP.WEB.Models.Authorization.InputViewModel">
+            <summary>Model storing data from a user account.</summary>
+        </member>
+        <member name="P:RideSharingAPP.WEB.Models.Authorization.InputViewModel.Email">
+            <summary>Field storing user email.</summary>
+        </member>
+        <member name="P:RideSharingAPP.WEB.Models.Authorization.InputViewModel.Password">
+            <summary>Field storing user password.</summary>
+        </member>
+        <member name="T:RideSharingApp.WEB.Controllers.AuthorizationController">
+            <summary>The controller in which logging in, registering, restoring access to the account.</summary>
+        </member>
+        <member name="F:RideSharingApp.WEB.Controllers.AuthorizationController.Role">
+            <summary>Variable storing role under which the user is authorized</summary>
+        </member>
+        <member name="M:RideSharingApp.WEB.Controllers.AuthorizationController.#ctor(RideSharingApp.BLL.Interfaces.IAccountInformationService,RideSharingAPP.BLL.Interfaces.IValidations.IAccountInformationValidation)">
+            <summary>Controller constructor.</summary>
+            <value>Accepts the interface of the validation service as well as the service table of accounts.</value>
+            <remarks>Constructor - a function that fires before other constructor methods.</remarks>
+        </member>
+        <member name="M:RideSharingApp.WEB.Controllers.AuthorizationController.Authorization">
+            <summary>Returns an atorization form</summary>
+            <remarks>Form that allows the user to enter the application or go to the registration form, password recovery.</remarks>
+            <returns>View()</returns>
+        </member>
+        <member name="M:RideSharingApp.WEB.Controllers.AuthorizationController.Authorization(RideSharingAPP.WEB.Models.Authorization.InputViewModel,System.String)">
+            <summary>Post version of authorization request.</summary>
+            <remarks>The post version of the authorization request returns the data transmitted by the user to the server.</remarks>
+            <returns>The menu form for successful authorization and the same form for not successful.</returns>
+            <value>A model created to store the data required for entry, as well as the selected role.</value>
+        </member>
+        <member name="M:RideSharingApp.WEB.Controllers.AuthorizationController.Registration">
+            <summary>Returns an registration form</summary>
+            <remarks>Form allowing you to register in the application.</remarks>
+            <returns>View()</returns>
+        </member>
+        <member name="M:RideSharingApp.WEB.Controllers.AuthorizationController.Registration(RideSharingAPP.WEB.Models.Authorization.RegistrationViewModel,System.String)">
+            <summary>Post version of registration request.</summary>
+            <remarks>The post version of the registration request returns the data by the user to the server.</remarks>
+            <returns>The menu form for successful authorization and the same form for not successful.</returns>
+            <value>A model created to store the data required for entry, as well as the selected role.</value>
+        </member>
+        <member name="M:RideSharingApp.WEB.Controllers.AuthorizationController.PasswordRecovery">
+            <summary>Returns password recovery form.</summary>
+            <remarks>A form that allows you to restore access to your account.</remarks>
+            <returns>View()</returns>
+        </member>
+        <member name="M:RideSharingApp.WEB.Controllers.AuthorizationController.PasswordRecovery(RideSharingAPP.WEB.Models.Authorization.PasswordRecoveryView)">
+            <summary>Post version of the request to restore account access.</summary>
+            <remarks>It receives from the client the data required to restore access to the account.</remarks>
+            <returns>Sends a new password to the mail and also redirects to the login form.</returns>
+            <value>Model containing user mail.</value>
+        </member>
+        <member name="M:RideSharingApp.WEB.Controllers.AuthorizationController.Dispose(System.Boolean)">
+            <summary>Invokes a method to free database connection memory.</summary>
+        </member>
+    </members>
+</doc>

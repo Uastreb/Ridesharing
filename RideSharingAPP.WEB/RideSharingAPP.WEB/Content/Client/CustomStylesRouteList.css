@@ -1,0 +1,155 @@
+﻿body{
+    padding:0 0 0 0;
+    margin: 0 0 0 0;
+}
+
+.hiddenElementsCar{
+    display:none;
+}
+
+.rigftbuttoncontroll {
+    margin-top: 5px;
+    margin-right: 5%;
+    width: 22%;
+    margin-left: 5%;
+    float: right;
+}
+
+.sumbbuttoncontroll {
+    margin-top: 15px;
+    margin-right: 15%;
+    width: 22%;
+    margin-left: 5%;
+}
+
+.leftbuttoncontroll {
+    margin-top: 15px;
+    margin-left: 20%;
+    /*margin-right:40%;*/
+    width: 22%;
+}
+
+.calendarEndDateOfRegistration {
+    margin-left: 20%;
+    margin-right: 20%;
+    width: 60%;
+    align-content: center;
+    margin-top: 10px;
+}
+
+.costStyle {
+    width: 75%;
+    height: 80%;
+}
+
+.left_calendar {
+    margin-top: 10px;
+    float: left;
+    width: 35%;
+}
+
+.right_calendar {
+    margin-top: 10px;
+    float: right;
+    width: 30%;
+}
+
+.calendar {
+    height: 90%;
+    width: 90%;
+    padding: 0 0 0 10px;
+}
+
+.tabButton {
+    margin-right: 30px;
+    margin-bottom: 20px;
+}
+
+.tab {
+    display: none;
+}
+
+.buttonPadding {
+    margin-bottom: 20px;
+    margin-right: 70%;
+}
+
+.textboxSearch {
+    max-width: 93%;
+}
+
+.paddingTop {
+    margin-top: 20px;
+}
+
+.marker {
+    background-image: url('mapbox-icon.png');
+    background-size: cover;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.labelEndPoint {
+    padding-top: 10px;
+}
+
+#zoom {
+    display: block;
+    position: relative;
+    margin: 20px auto;
+    width: 50%;
+    height: 40px;
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    font-size: 12px;
+    text-align: center;
+    color: #fff;
+    background: #ee8a65;
+}
+
+#fly {
+    display: block;
+    position: relative;
+    margin: 0px auto;
+    width: 50%;
+    height: 40px;
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    font-size: 12px;
+    text-align: center;
+    color: #fff;
+    background: #ee8a65;
+}
+
+
+div.wrapper {
+    width: 100%;
+    height: 650px;
+}
+
+div.left_block {
+    display: block;
+    overflow: auto;
+    overflow-x: hidden;
+    float: left;
+    width: 50%;
+    height: 100%;
+}
+
+div.right_block {
+    float: right;
+    width: 50%;
+    height: 100%;
+}
+
+
+html, body, #map {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}

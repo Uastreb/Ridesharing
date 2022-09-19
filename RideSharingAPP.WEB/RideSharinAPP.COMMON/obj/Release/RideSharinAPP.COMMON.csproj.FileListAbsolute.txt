@@ -1,0 +1,12 @@
+C:\Users\Вадим\Source\Repos\ridesharingapp\RideSharingAPP.WEB\RideSharinAPP.COMMON\bin\Release\RideSharinAPP.COMMON.dll
+C:\Users\Вадим\Source\Repos\ridesharingapp\RideSharingAPP.WEB\RideSharinAPP.COMMON\bin\Release\RideSharinAPP.COMMON.pdb
+C:\Users\Вадим\Source\Repos\ridesharingapp\RideSharingAPP.WEB\RideSharinAPP.COMMON\bin\Release\AutoMapper.dll
+C:\Users\Вадим\Source\Repos\ridesharingapp\RideSharingAPP.WEB\RideSharinAPP.COMMON\bin\Release\NLog.dll
+C:\Users\Вадим\Source\Repos\ridesharingapp\RideSharingAPP.WEB\RideSharinAPP.COMMON\bin\Release\AutoMapper.pdb
+C:\Users\Вадим\Source\Repos\ridesharingapp\RideSharingAPP.WEB\RideSharinAPP.COMMON\bin\Release\AutoMapper.xml
+C:\Users\Вадим\Source\Repos\ridesharingapp\RideSharingAPP.WEB\RideSharinAPP.COMMON\bin\Release\NLog.xml
+C:\Users\Вадим\Source\Repos\ridesharingapp\RideSharingAPP.WEB\RideSharinAPP.COMMON\obj\Release\RideSharinAPP.COMMON.csprojAssemblyReference.cache
+C:\Users\Вадим\Source\Repos\ridesharingapp\RideSharingAPP.WEB\RideSharinAPP.COMMON\obj\Release\RideSharinAPP.COMMON.csproj.CoreCompileInputs.cache
+C:\Users\Вадим\Source\Repos\ridesharingapp\RideSharingAPP.WEB\RideSharinAPP.COMMON\obj\Release\RideSharinAPP.COMMON.csproj.CopyComplete
+C:\Users\Вадим\Source\Repos\ridesharingapp\RideSharingAPP.WEB\RideSharinAPP.COMMON\obj\Release\RideSharinAPP.COMMON.dll
+C:\Users\Вадим\Source\Repos\ridesharingapp\RideSharingAPP.WEB\RideSharinAPP.COMMON\obj\Release\RideSharinAPP.COMMON.pdb

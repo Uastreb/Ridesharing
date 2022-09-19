@@ -1,0 +1,267 @@
+﻿@model IEnumerable<RideSharingAPP.WEB.Models.Route.TripSearchedListViewModel>
+@{
+    Layout = "~/Views/Shared/_LayoutClient.cshtml";
+    ViewBag.Title = "RouteList";
+}
+<head>
+    <meta charset='utf-8' />
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.3.2/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.3.2/mapbox-gl.css' rel='stylesheet' />
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+    <link href="~/Content/Client/CustomStylesRouteList.css" rel="stylesheet" />
+</head>
+<body>
+    @{ if (Model != null)
+        {
+    <table class="table">
+        @foreach (var item in Model)
+        {
+            using (Html.BeginForm("RegisterForRoute", "Client", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.Hidden("id", item.id)
+                <tr>
+                    <th style="width:50px; text-align:center;" rowspan="2">
+                        @Html.Label("Окончание регистрации")
+                    </th>
+                    <th colspan="2" style="text-align:center">
+                        @Html.Label("Маршрут")
+                    </th>
+                    <th rowspan="2" style="text-align:center">
+                        @Html.Label("Отправление")
+                    </th>
+                    <th rowspan="2" style="text-align:center">
+                        @Html.Label("Прибытие")
+                    </th>
+                    <th rowspan="2" style="text-align:center">
+                        @Html.Label("Места")
+                    </th>
+                    <th rowspan="2" style="text-align:center">
+                        @Html.Label("Стоимость")
+                    </th>
+                </tr>
+                <tr>
+                    <th style="text-align:center">
+                        @Html.Label("Отправление")
+                    </th>
+                    <th style="text-align:center">
+                        @Html.Label("Прибытие")
+                    </th>
+                </tr>
+                <tr></tr>
+                <tr>
+                    <td style="width:50px">
+                        @Html.DisplayFor(modelItem => item.RegistrationEndDate)
+                        @Html.Hidden("RegistrationEndDate", item.RegistrationEndDate)
+
+                    </td>
+                    @Html.Hidden("OriginCoordinates", item.OriginCoordinates)
+                    <td class="points" style="text-align:center">
+                        @Html.DisplayFor(modelItem => item.OriginCoordinates)
+                    </td>
+                    @Html.Hidden("EndCoordinates", item.EndCoordinates)
+                    <td class="points" style="text-align:center">
+                        @Html.DisplayFor(modelItem => item.EndCoordinates)
+
+                    </td>
+                    <td style="text-align:center">
+                        @Html.DisplayFor(modelItem => item.DateAndTimeOfDepartue)
+                        @Html.Hidden("DateAndTimeOfDepartue", item.DateAndTimeOfDepartue)
+                    </td>
+                    <td style="text-align:center">
+                        @Html.DisplayFor(modelItem => item.DateAndTimeOfArrival)
+                        @Html.Hidden("DateAndTimeOfArrival", item.DateAndTimeOfArrival)
+                    </td>
+                    <td style="text-align:center">
+                        @Html.DisplayFor(modelItem => item.NumberOfSeats)
+                        @Html.Hidden("NumberOfSeats", item.NumberOfSeats)
+                    </td>
+                    <td style="text-align:center">
+                        @Html.DisplayFor(modelItem => item.TotalСost)
+                        @Html.Hidden("TotalСost", item.TotalСost)
+                    </td>
+                </tr>
+                <tr name="@item.id" style="display:none; background-color:#FAFAD2;">
+                    <th></th>
+                    <th colspan="2" style="text-align:center;">
+                        @Html.Label("Подробный маршрут")
+                    </th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                for (int i = 0; i < item.PassingPoints.Count(); i++)
+                {
+                    var temp = item.PassingPoints.ToList();
+                    <tr name="@item.id" style="display:none; background-color:#FAFAD2;">
+                        <td></td>
+                        @Html.Hidden("PassingPoints[i].OriginCoordinates", temp[i].OriginCoordinates)
+                        <td class="points" style="text-align:center;">
+                            @Html.DisplayFor(modelItem => temp[i].OriginCoordinates)
+                        </td>
+                        @Html.Hidden("PassingPoints[i].EndCoordinates", temp[i].EndCoordinates)
+                        <td class="points" style="text-align:center;">
+                            @Html.DisplayFor(modelItem => temp[i].EndCoordinates)
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                }
+                <tr name=@item.CarId style="display:none; background-color: #90EE90;">
+                    <th>
+                        @Html.Label("Марка")
+                    </th>
+                    <th>
+                        @Html.Label("Модель")
+                    </th>
+                    <th>
+                        @Html.Label("Год выпуска")
+                    </th>
+                    <th>
+                        @Html.Label("Регистрационный знак")
+                    </th>
+                    <th>
+                        @Html.Label("Комментарий")
+                    </th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr name=@item.CarId style="display:none; background-color: #90EE90;">
+                    @Html.Hidden("CarId", item.CarId)
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Car.Mark)
+                        @Html.Hidden("Car.Mark", item.Car.Mark)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Car.Model)
+                        @Html.Hidden("Car.Model", item.Car.Model)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Car.YearOfIssue)
+                        @Html.Hidden("Car.YearOfIssue", item.Car.YearOfIssue)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Car.RegistrationNumber)
+                        @Html.Hidden("Car.RegistrationNumber", item.Car.RegistrationNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Car.Comments)
+                        @Html.Hidden("Car.Comments", item.Car.Comments)
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr name=@item.DriverId style="display:none; background-color:#FFFAFA;">
+                    <th colspan="2">
+                        @Html.Label("ФИО")
+                    </th>
+                    <th>
+                        @Html.Label("Год рождения")
+                    </th>
+                    <th>
+                        @Html.Label("Телефон")
+                    </th>
+                    <th>
+                        @Html.Label("Комментарий")
+                    </th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr name=@item.DriverId style="display:none; background-color:#FFFAFA;">
+                    @Html.Hidden("DriverId", item.DriverId)
+                    <td colspan="2">
+                        @Html.Label(item.Driver.Surname + " " + item.Driver.Name + " " + item.Driver.Patronymic)
+                        @Html.Hidden("Driver.Surname", item.Driver.Surname)
+                        @Html.Hidden("Driver.Name", item.Driver.Name)
+                        @Html.Hidden("Driver.Patronymic", item.Driver.Patronymic)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Driver.DateOfBirth.Year)
+                        @Html.Hidden("Driver.DateOfBirth", item.Driver.DateOfBirth)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Driver.Telephone)
+                        @Html.Hidden("Driver.Telephone", item.Driver.Telephone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Driver.Comments)
+                        @Html.Hidden("Driver.Comments", item.Driver.Comments)
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="myButtonStyle btn btn-default" onclick="showElements(@item.DriverId);" type="button" value=""> Водитель </button>
+                    </td>
+                    <td>
+                        <button class="myButtonStyle btn btn-default" onclick="showElements(@item.CarId);" type="button" value=""> Автомобиль </button>
+                    </td>
+                    <td>
+                        <button class="myButtonStyle btn btn-default" onclick="showElements(@item.id);" type="button" value=""> Точки маршрута </button>
+                    </td>
+                    <td>
+                        <input type="submit" value="Зарегестрироваться" class="btn btn-default" />
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            }
+        }
+    </table>
+            @Html.ActionLink("Добавить", "CreateRoute", null, new { @class = "btn btn-default", style = "margin-bottom:25px;" })
+        }
+        else
+        {
+            <h2> У вас нет ни одного активного маршрута</h2>
+            @Html.ActionLink("Добавить", "CreateRoute", null, new { @class = "btn btn-default", style = "margin-top:25px;" })
+        }
+    }
+
+
+    <script type="text/javascript">
+        function showElements(itemId) {
+            var arr = document.getElementsByName(itemId);
+            console.log(arr);
+            arr.forEach(function (element) {
+                if (element.style.display == "none" || element.style.display == "") {
+                    element.style.display = "table-row";
+                }
+                else {
+                    element.style.display = "none";
+                }
+            });
+        }
+
+
+        $('.points').each(function () {
+            SearchPlace(this);
+        });
+
+
+        function SearchPlace(label) {
+            var coordinates = label.innerText.split(',');
+            latitude = coordinates[1];
+            longitude = coordinates[0];
+
+            var request = new XMLHttpRequest();
+            var url = "https://places-dsn.algolia.net/1/places/reverse?aroundLatLng=" + latitude + "," + longitude + "&hitsPerPage=5&language=ru";
+            request.abort();
+            request.open('GET', url, true);
+            request.send();
+
+            request.onload = function () {
+                if (request.status >= 200 && request.status < 400) {
+                    var data = JSON.parse(request.responseText);
+                    label.innerHTML = data.hits[0].country + ", " + data.hits[0].locale_names[0];
+                }
+            };
+        };
+    </script>
+</body>
+

@@ -1,0 +1,11 @@
+﻿1>------ Перестроение всех файлов начато: проект: RideSharingAPP.DAL, Конфигурация: Debug Any CPU ------
+1>  RideSharingAPP.DAL -> D:\RideSharingAPP\RideSharingAPP.WEB\RideSharingAPP.DAL\bin\Debug\RideSharingAPP.DAL.dll
+2>------ Перестроение всех файлов начато: проект: RideSharingAPP.BLL, Конфигурация: Debug Any CPU ------
+2>  RideSharingAPP.BLL -> D:\RideSharingAPP\RideSharingAPP.WEB\RideSharingAPP.BLL\bin\Debug\RideSharingAPP.BLL.dll
+3>------ Перестроение всех файлов начато: проект: RideSharingAPP.WEB, Конфигурация: Debug Any CPU ------
+3>C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\Microsoft.Common.CurrentVersion.targets(5055,5): warning MSB3061: Не удается удалить файл "D:\RideSharingAPP\RideSharingAPP.WEB\RideSharingAPP.WEB\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll". Процесс не может получить доступ к файлу "D:\RideSharingAPP\RideSharingAPP.WEB\RideSharingAPP.WEB\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll", так как этот файл используется другим процессом.
+3>C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\Microsoft.Common.CurrentVersion.targets(2110,5): warning MSB3277: обнаружены неразрешимые конфликты между различными версиями "Ninject". Эти конфликты перечисляются в журнале сборки, если выбран подробный уровень детализации журнала.
+3>D:\RideSharingAPP\RideSharingAPP.WEB\RideSharingAPP.WEB\Helpers\SendEmail.cs(21,30,21,32): warning CS0168: Переменная "ex" объявлена, но ни разу не использована.
+3>D:\RideSharingAPP\RideSharingAPP.WEB\RideSharingAPP.WEB\Helpers\SendEmail.cs(39,30,39,32): warning CS0168: Переменная "ex" объявлена, но ни разу не использована.
+3>  RideSharingAPP.WEB -> D:\RideSharingAPP\RideSharingAPP.WEB\RideSharingAPP.WEB\bin\RideSharingAPP.WEB.dll
+========== Перестроение всех проектов: успешно: 3, с ошибками: 0, пропущено: 0 ==========
