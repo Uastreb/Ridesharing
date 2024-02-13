@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/RideSharingAPP.WEB/RideSharingAPP.WEB/Web.config
+/RideSharingAPP.WEB/RideSharingAPP.WEB/Web.Debug.config
+/RideSharingAPP.WEB/RideSharingAPP.WEB/Web.Release.config
